@@ -1,11 +1,16 @@
+beat_dens = (knit 1, 15, 2, 1, 1, 15, 3, 1).ring
+
 live_loop :industry do
-  sample :loop_industrial, beat_stretch: 1, lpf: 130, attack: 0.1
+  sample :loop_industrial, beat_stretch: 1, lpf: 120, attack: 0.1, amp: 0.8
   sleep 1
 end
 
 live_loop :beat, sync: :industry do
-  sample :bd_haus, amp: 2, cutoff: 80, on: (ring 1,0,0,1,1,0,0,1).tick
-  sleep 0.25
+  tick
+  density beat_dens.look do
+    sample :bd_haus, amp: 2, cutoff: 90, on: (ring 1,0,0,1,1,0,0,1).look
+    sleep 0.25
+  end
 end
 
 live_loop :synth do
