@@ -3,7 +3,7 @@
 
 live_loop :low do
   tick
-  synth :zawa, wave: 1, phase: 0.25, release: 5, note: (knit :e1, 12, :c1, 4).look
+  synth :fm, wave: 1, phase: 0.25, release: 5, note: (knit :e1, 12, :c1, 4).look
   sleep 4
 end
 
