@@ -66,6 +66,7 @@ end
 sleep 16
 
 live_loop :chitz, sync: :beat do
+  # todo: make list of volumes to tick
   chitz_vol_1 = rrand_i(0, 1)
   chitz_vol_2 = rrand_i(0, 1)
   32.times do
