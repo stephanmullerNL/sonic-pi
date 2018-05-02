@@ -1,5 +1,8 @@
+# 01. closure
+
 ### DRONE
 
+drone_fx_list = [:flanger, :slicer, :pan].ring
 drone_fx = :pan
 
 live_loop :drones do
@@ -12,6 +15,11 @@ live_loop :drones do
 end
 
 sleep 8
+
+live_loop :dronefx do
+  drone_fx = drone_fx_list.tick
+  sleep 32
+end
 
 ### DRUMS
 
@@ -32,27 +40,27 @@ end
 
 sleep 32
 
+### MORE DRUMS
+
 live_loop :beat, sync: :kick do
   sample :loop_breakbeat, beat_stretch: 2, pre_amp: 3
   sleep 2
 end
 
-drone_fx = :slicer
-
 sleep 32
 
-drone_fx = :pan
+### PARTY
 
 intro = [67, 64, 43, 48, 52, 60, 40, 36]
 theme =  [67, 48, 28, 59, 55, 52, 36, 43, 40, 24, 64, 31, 67, 48, 28, 60]
 emeht = [44, 59, 52, 64, 56, 47, 71, 40, 68, 44, 59, 52, 64, 56, 47, 68]
-up = lambda {|n| n + 8}
-down = lambda {|n| n - 8}
+up =   ->(n) { n + 8}
+down = ->(n) { n - 8}
 
 melodies = [
-  intro, 20, 8,
-  theme, 59, 24,
-  theme.map(&up), 59, 8,
+  ##| intro, 20, 8,
+  theme, 59, 8,
+  ##| theme.map(&up), 59, 8,
   theme, 54, 24,
   theme.map(&down), 46, 8,
   theme, 54, 8,
@@ -61,7 +69,7 @@ melodies = [
   theme, 42, 8,
   theme, 20, 16,
   theme.map(&down), 20, 8,
-  theme, 59, 8,
+  theme, 54, 8,
   theme, 20, 16,
   emeht, 40, 4,
   theme, 20, 28
