@@ -74,8 +74,6 @@ end
 
 melodies = [
   [theme, 59, 4],
-  [theme, 54, 12],
-  [theme, 54, 2, -8],
   [theme, 54, 4],
   [theme, 42, 8],
   [theme, 42, 2, 8],
@@ -84,6 +82,8 @@ melodies = [
   [theme, 20, 2, -8],
   [theme, 54, 4],
   [theme, 20, 8],
+  [emeht, 40, 2],
+  [theme, 20, 12],
   [emeht, 40, 2],
   [theme, 20, 14],
   [theme, 59, 1],
