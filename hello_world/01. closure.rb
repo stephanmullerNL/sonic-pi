@@ -41,7 +41,7 @@ live_loop :kick do
   end
 end
 
-##| sleep 24
+sleep 24
 
 ### MORE DRUMS
 
@@ -51,44 +51,39 @@ live_loop :beat, sync: :kick do
   sleep 2
 end
 
-##| sleep 24
+sleep 24
 
 ### MUSIC
 
 theme = [67, 48, 28, 60, 67, 48, 28, 59, 55, 52, 36, 43, 40, 24, 64, 31]
 emeht = [64, 56, 47, 68, 44, 59, 52, 64, 56, 47, 71, 40, 68, 44, 59, 52]
+use_synth :piano
 
 define :play_melody do | notes, treshold, times, pitch = 0 |
-  times.times do
-    with_fx :octaver, mix: 0.5 do
-      with_fx :distortion, distort: 0 do
-        with_synth :piano do
-          notes.each do | note |
-            play note, release: 0.125, pitch: pitch, on: note > treshold
-            sleep 0.125
-          end
-        end
+  with_fx :octaver, mix: 0.5 do
+    times.times do
+      notes.each do | note |
+        play note, release: 0.125, pitch: pitch, on: note > treshold
+        sleep 0.125
       end
     end
   end
 end
 
 melodies = [
-  [theme, 59, 4],
-  [theme, 54, 4],
-  [theme, 42, 8],
+  [theme, 42, 12],
   [theme, 42, 2, 8],
   [theme, 42, 4],
   [theme, 20, 8],
   [theme, 20, 2, -8],
-  [theme, 40, 2],
+  [theme, 42, 4],
   [theme, 54, 2],
   [theme, 20, 8],
   [emeht, 40, 2],
   [theme, 20, 12],
-  [emeht, 40, 2],
+  [emeht, 40, 4],
   [theme, 20, 14],
-  [theme, 59, 1],
+  [theme, 42, 1],
   [theme.take(8), 59, 1]
 ]
 
