@@ -6,7 +6,7 @@ drone_fx_list = [:flanger, :slicer, :pan].ring
 drone_fx = :pan
 
 live_loop :drones do
-  stop if tick > 48
+  stop if tick > 42
   with_fx drone_fx do
     with_fx :reverb, room: 0.7 do
       sample :ambi_drone, sustain: 2, release: 2
@@ -15,13 +15,14 @@ live_loop :drones do
   sleep 4
 end
 
+sleep 7
+
 live_loop :dronefx do
-  sleep 7
   drone_fx = drone_fx_list.tick
-  sleep 25
+  sleep 24
 end
 
-sleep 8
+sleep 1
 
 ### DRUMS
 
@@ -29,7 +30,7 @@ buildup = (ramp *range(0, 2, 0.02))
 dens = (knit 4, 1, 1, 7, 3, 1, 1, 7).ring
 
 live_loop :kick do
-  stop if tick > 388
+  stop if tick > 354
   density dens.look do
     with_fx :slicer, phase: 0.1 do
       with_fx :distortion, distort: 0.8 do
@@ -40,17 +41,17 @@ live_loop :kick do
   end
 end
 
-sleep 24
+##| sleep 24
 
 ### MORE DRUMS
 
 live_loop :beat, sync: :kick do
-  stop if tick > 89
+  stop if tick > 81
   sample :loop_breakbeat, beat_stretch: 2, pre_amp: 3
   sleep 2
 end
 
-sleep 40
+##| sleep 24
 
 ### MUSIC
 
@@ -63,7 +64,7 @@ define :play_melody do | notes, treshold, times, pitch = 0 |
       with_fx :distortion, distort: 0 do
         with_synth :piano do
           notes.each do | note |
-            play note, release: 0.125, pitch: pitch, on: note > treshold && tick(:skip4) > 3
+            play note, release: 0.125, pitch: pitch, on: note > treshold
             sleep 0.125
           end
         end
@@ -80,7 +81,8 @@ melodies = [
   [theme, 42, 4],
   [theme, 20, 8],
   [theme, 20, 2, -8],
-  [theme, 54, 4],
+  [theme, 40, 2],
+  [theme, 54, 2],
   [theme, 20, 8],
   [emeht, 40, 2],
   [theme, 20, 12],
