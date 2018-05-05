@@ -31,7 +31,7 @@ sleep 16
 live_loop :crash do
   with_fx :krush, res: 0.7 do
     sample :drum_cowbell, cutoff: 90, amp: 1
-    sleep 4
+    sleep 8
   end
 end
 
@@ -82,8 +82,6 @@ chitz_volumes = [
   [0, 0],
   [0, 1],
   [1, 1],
-  [0, 1],
-  [1, 0],
   [0, 0]
 ]
 
