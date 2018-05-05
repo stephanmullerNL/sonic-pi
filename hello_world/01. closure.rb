@@ -15,12 +15,13 @@ live_loop :drones do
   sleep 4
 end
 
-sleep 8
-
 live_loop :dronefx do
+  sleep 7
   drone_fx = drone_fx_list.tick
-  sleep 32
+  sleep 25
 end
+
+sleep 8
 
 ### DRUMS
 
@@ -49,7 +50,7 @@ live_loop :beat, sync: :kick do
   sleep 2
 end
 
-sleep 32
+sleep 40
 
 ### PARTY
 
