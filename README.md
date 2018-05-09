@@ -1,4 +1,4 @@
-#Sonic Pi
+# Sonic Pi
 
 Inspired by [Sam Aaron](http://sam.aaron.name/)'s talk at Luminis DevCon I started playing around with [Sonic Pi](https://sonic-pi.net/) to learn some Ruby and create some music.
 
