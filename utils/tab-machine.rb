@@ -10,6 +10,13 @@ HH:|----o---o---o---|----o---o---o---|----o---o---o---|----o---o-------|
 HH:|x-x-x-x-x-x-x-x-|x-x-x-x-x-x-x-o-|x-x-x-x-x-x-x-x-|x-x-x-x-x-x-x-o-|
  S:|----o-------o---|----o-------o---|----o-------o---|----o-------o---|
  B:|o-o-----o-o-----|o-o-----o-o-----|o-o-----o-o-----|o-o-----o-o-----|
+
+ C:|X---------------|X---------------|X---------------|X---------------|
+HH:|----o---o-------|----o-----o---o-|----o---o-------|----o---o-------|
+ T:|----------------|------------o---|----------------|----------------|
+ S:|----o---o-------|----o---f-------|----o---o-------|----o-----oooooo|
+FT:|----------------|------------o---|----------------|----------------|
+ B:|o-o---oo--o-----|o-o----o-o-o-o-o|o-o---oo--o-----|o-o---o-o-------|
 "
 
 instruments = {
@@ -21,6 +28,7 @@ instruments = {
   },
   'S' => {
     'o' => :drum_snare_hard,
+    #todo: implement flam
     'f' => :drum_snare_hard
   },
   'T' => { 'o' => :drum_tom_hi_hard },
@@ -47,7 +55,7 @@ end
 bars = parse(tabs)
 
 bars.each do | bar |
-  # Assume each line in a bar is as long as the first one
+  # Assume all lines in a bar is as long as the first one
   length = bar.first[1].length
   length.times do | n |
     instruments.each do | key, sounds |
