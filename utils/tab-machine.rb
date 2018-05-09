@@ -1,6 +1,14 @@
+### A simple drum tab playing machine (work in progress)
+
+### Currently only supports a limited syntax:
+### - Each line of notes must be preceded by an instrument name followed by a colon (:)
+### - Each line of notes must include at least one pipe (|), otherwise it counts as empty
+### - Each empty line demarcates a bar (a group of lines that are played simultaneously)
+
 use_bpm 100
 time = 0.25
 
+# Paste tabs here
 tabs = "
  C:|X---------------|X---------------|X---------------|X---------------|
 HH:|----o---o---o---|----o---o---o---|----o---o---o---|----o---o-------|
@@ -19,6 +27,7 @@ FT:|----------------|------------o---|----------------|----------------|
  B:|o-o---oo--o-----|o-o----o-o-o-o-o|o-o---oo--o-----|o-o---o-o-------|
 "
 
+# Define what sample should be used for each character in each instrument's line
 instruments = {
   'B' => { 'o' => :drum_bass_hard },
   'C' => { 'X' => :drum_splash_hard },
@@ -28,12 +37,16 @@ instruments = {
   },
   'S' => {
     'o' => :drum_snare_hard,
-    #todo: implement flam
+    #TODO: implement flam
     'f' => :drum_snare_hard
   },
   'T' => { 'o' => :drum_tom_hi_hard },
   'FT' => { 'o' => :drum_tom_lo_hard }
 }
+
+
+
+### MACHINE - DO NOT EDIT
 
 # convert an array of tab lines to an object the machine can work with
 def to_bar_hash(ar)
@@ -60,7 +73,7 @@ bars.each do | bar |
   length.times do | n |
     instruments.each do | key, sounds |
       note = bar[key][n]
-      sample sounds[note]
+      sample sounds[note] if sounds[note]
     end
     sleep time
   end
