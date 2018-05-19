@@ -1,44 +1,58 @@
 use_bpm 40
 
+bla = '~/s/newshit/blabla.wav'
+
 def pattern(p)
   return p.ring.tick(p) == 'x'
 end
 
 live_loop :brr do
   sample :glitch_bass_g
-  sleep 1
+  sleep 2
 end
 
+scales = [:c3, :d3, :b3]
 live_loop :zim, sync: :brr do
-  play_chord (scale :c3, :augmented), sustain: 2
-  sleep 4
+  sc = scales.choose
+  4.times do
+    play_chord (scale sc, :bhairav), sustain: 2, release: 2
+    sleep 4
+  end
 end
 
 live_loop :percussion do
   sample :glitch_perc4, amp: 1, on: pattern('x---')
   sample :glitch_perc2, on: pattern('x----x--')
-  sample :glitch_perc5, on: pattern('--x-')
+  sample :elec_blup, on: pattern('--x-')
   sleep 0.25
 end
 
 live_loop :chaka do
-  sleep 7.5
+  sleep 3.5
   with_fx :echo, decay: 4, phase: 0.125 do
     sample :perc_impact1, beat_stretch: 0.2, on: pattern('x--')
   end
   with_fx :echo, decay: 4, phase: 0.15 do
     sample :perc_impact1, beat_stretch: 0.3, on: pattern('x---')
   end
-  sleep 0.5
+  sleep 3
 end
 
 notes = [54, 55, 56, 57].ring
 live_loop :boop do
   use_synth :beep
   with_fx :reverb, room: 0.4 do
-    play notes.tick, release: 0.2, on: pattern('xxx-x-xx'), lpf: 70
+    ##| play notes.tick, release: 0.2, on: pattern('xx-xx-xx'), lpf: 70
     sleep 0.25
   end
+end
+
+live_loop :toms do
+  5.times do
+    sample :drum_tom_mid_soft
+    sleep 0.1
+  end
+  sleep 12.5
 end
 
 live_loop :sprinkle do
@@ -47,4 +61,12 @@ live_loop :sprinkle do
     sleep 0.125
   end
   sleep 4.25
+end
+
+onsets = [1, 3, 24, 26].ring
+live_loop :bla, sync: :brr do
+  with_fx :echo, decay: 4 do
+    sample bla, onset: onsets.tick, amp: 2
+    sleep 8
+  end
 end
