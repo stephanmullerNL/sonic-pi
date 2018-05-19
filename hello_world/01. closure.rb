@@ -15,14 +15,14 @@ live_loop :drones do
   sleep 4
 end
 
-sleep 7
+##| sleep 7
 
 live_loop :dronefx do
   drone_fx = drone_fx_list.tick
   sleep 24
 end
 
-sleep 1
+##| sleep 1
 
 ### DRUMS
 
@@ -41,17 +41,17 @@ live_loop :kick do
   end
 end
 
-sleep 24
+##| sleep 24
 
 ### MORE DRUMS
 
 live_loop :beat, sync: :kick do
   stop if tick > 81
-  sample :loop_breakbeat, beat_stretch: 2, pre_amp: 3
+  sample :loop_breakbeat, beat_stretch: 2, pre_amp: 3, hpf: 40, lpf: 130
   sleep 2
 end
 
-sleep 24
+##| sleep 24
 
 ### MUSIC
 
