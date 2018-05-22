@@ -22,8 +22,8 @@ live_loop :drums do
 end
 
 live_loop :ticks do
-  density rrand_i(1, 3) * 2 do
-    sample :drum_cymbal_closed, on: one_in(2)
+  density rrand_i(1, 2) * 2 do
+    sample :drum_cymbal_closed
     sleep 0.5
   end
   sleep 0.5

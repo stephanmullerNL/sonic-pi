@@ -37,7 +37,7 @@ sleep 16 * s
 
 live_loop :percussion do
   sample :glitch_perc4, amp: 1, on: pattern('x---')
-  sample :glitch_perc2, on: pattern('x----x--')
+  ##| sample :glitch_perc2, on: pattern('x----x--')
   sample :elec_blup, on: pattern('--x-')
   sleep 0.25
 end
@@ -48,22 +48,22 @@ live_loop :zim, sync: :brr do
   sc = scales.tick
   use_synth :mod_beep
   4.times do
-    play_chord (scale sc, :gong), sustain: 2, release: 2
+    ##| play_chord (scale sc, :gong), sustain: 2, release: 2
     sleep 4
   end
 end
 
-sleep 4 * s
+sleep 8 * s
 
 live_loop :sprinkle do
   6.times do
-    sample :guit_harmonics, onset: choose
+    ##| sample :guit_harmonics, onset: choose
     sleep 0.125
   end
   sleep 4.25
 end
 
-sleep 4 * s
+sleep 12 * s
 
 onsets = [1, 3, 24, 26].ring
 live_loop :bla, sync: :brr do
@@ -73,13 +73,13 @@ live_loop :bla, sync: :brr do
   end
 end
 
-
+sleep 12 * s
 
 notes = [54, 55, 56, 57].ring
 live_loop :boop do
   use_synth :beep
   with_fx :reverb, room: 0.4 do
-    ##| play notes.tick, release: 0.2, on: pattern('xx-xx-xx'), lpf: 70
+    play notes.tick, release: 0.2, on: pattern('xx-xx-xx'), lpf: 60, pitch: 4
     sleep 0.25
   end
 end
