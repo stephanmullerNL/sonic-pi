@@ -1,13 +1,8 @@
-# 02. promise
+# 02. facade
 
 s = 1
 use_bpm 70
 last = 320
-
-live_loop :c do
-  puts tick
-  sleep 0.5
-end
 
 ### DRUMS
 
@@ -24,7 +19,7 @@ end
 bass = (knit :d2, 4, :f2, 3, :e2, 1).ring
 
 live_loop :doop, sync: :beat do
-  stop if tick >= last
+  stop if tick >= last + 16
   with_fx :distortion do
     with_fx :flanger do
       use_synth :dsaw
@@ -39,7 +34,7 @@ sleep 16 * s
 ### BELL
 
 live_loop :bell do
-  stop if (tick + 1) * 16 >= last
+  stop if (tick) * 16 > last
   with_fx :krush, res: 0.7 do
     sample :drum_cowbell, cutoff: 90, amp: 1
   end
@@ -49,6 +44,7 @@ end
 ### MORE DRUMS
 
 live_loop :drums, sync: :beat do
+  stop if (tick + 2) * 16 >= last
   sleep -0.25
   11.times do
     sleep 0.25
@@ -63,9 +59,10 @@ sleep 16 * s
 
 ### MELODY
 
-blips = (ring 63, 67, 60)
+blips = (ring 67, 60, 63, 60, 63, 67)
 
 live_loop :blips, sync: :beat do
+  stop if (tick) * 16 >= last
   with_fx :distortion, distort: 0.2 do
     with_fx :bitcrusher do
       with_synth :prophet do
@@ -73,7 +70,7 @@ live_loop :blips, sync: :beat do
         sleep 1.25
         
         3.times do
-          play blips.tick, release: 0.125
+          play blips.tick(:blip), release: 0.125
           sleep 0.25
         end
         
@@ -146,11 +143,12 @@ roys = [
   [1, 1, 1, 0],
   [1, 0, 0, 1],
   [0, 1, 1, 0],
+  [0, 1, 1, 0],
 ]
 
 live_loop :roy, sync: :beat do
   args = roys.tick
-  stop if look >= 11
+  stop if look >= 13
   8.times do | x |
     roy(bass[x], *args)
   end
