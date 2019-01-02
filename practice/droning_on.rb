@@ -19,11 +19,10 @@ live_loop :tring do
       sleep 16
     end
   end
-  ##| end
 end
 
-live_loop :clocks do
-  dens = (ring 1, 1, 2, 3, 2, 1, 1, 2, 5).tick
+live_loop :clicks do
+  dens = (ring 1, 1, 2, 3, 2, 1, 2, 5).tick
   density dens do
     sample :drum_snare_hard, amp: 0.5, rate: 3, cutoff: 120
     sleep 3
@@ -34,7 +33,7 @@ end
 
 live_loop :lunar do
   sample :ambi_lunar_land, rate: -1
-  sleep 32 * rrand_i(1, 2)
+  sleep 32 + 8 * rrand_i(1, 4)
 end
 
 live_loop :beat do
